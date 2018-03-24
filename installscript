@@ -5,7 +5,7 @@
 # Version 1.2
 
 if [[ $EUID -ne 0 ]]; then
-   	echo "This script must be run as root type: sudo ./installscript" 
+   	echo "This script must be run as root type: sudo ./installscript"
    	exit 1
 else
 	#Update and Upgrade
@@ -15,301 +15,195 @@ else
 	sudo apt-get install dialog
 	cmd=(dialog --separate-output --checklist "Please Select Software you want to install:" 22 76 16)
 	options=($ "Install Flatpak Repository" off
-			 $# "Install Snaps Repository" off
-			 1 "Sublime Text" off    # any option can be set to default to "on"
-	         2 "Simplenote" off
-	         3 "Gedit" off
-	         4 "Terminator" off
-	         5 "Filezilla" off
-	         6 "Zoom Meeting Client" off
-	         7 "Telegram (SNAP)" off
-	         8 "Elementary Tweaks" off
-	         9 "Ubuntu Restricted Extras" off
-	         10 "SM Player Media Player" off
-	         11 "Gnome Tweak Tool" off
-	         12 "Google Chrome" off
-	         13 "Vivaldi" off
-	         14 "Firefox Browser" off
-	         15 "GIMP" off
-	         16 "OBS-Studio" off
-	         17 "Kdenlive" off
-	         18 "Gnome Boxes" off
-			 19 "Virtualbox" off
-			 20 "Atom" off
-			 21 "Putty" off
-			 22 "Steam (Valve)" off
-			 23 "PIA VPN (Network Mgr Version)" off
-			 24 "Docky" off
-			 25 "Lutris" off
-			 26 "Hexchat" off
-			 27 "Shotwell" off
-			 28 "Cheese" off
-			 29 "Audacity" off
-			 30 "Guvcview (webcam settings)" off
-			 31 "Pithos (Pandora)" off
-			 32 "Gnome Shell" off
-			 33 "Gnome-do (search tool)" off
-			 34 "Discord (Snap)" off
-			 35 "Google Desktop Player (rocco)" off
-			 36 "Etcher" off)
+			 $# "Install Snaps Repository" on
+			 1 "rxvt-unicode" on    # any option can be set to default to "on"
+	     2 "Terminator" off
+	     3 "Simplenote" on
+	     4 "vim" on
+	     5 "Filezilla" on
+	     6 "" off
+	     7 "subnetcalc" on
+	     8 "dia" on
+	     9 "Teamviewer" on
+	     10 "gdebi" on
+	     11 "nmap" on
+	     12 "screenfetch" off
+	     13 "Vivaldi" on
+	     14 "tomboy Notizen" off
+	     15 "GIMP" off
+	     16 "Atom" on
+	     17 "Putty" on
+	     18 "Steam (Valve)" off
+			 19 "Docky" off
+			 20 "Hexchat" off
+			 21 "Discord (Snap)" off
+			 22 "Etcher" off
+			 23 "" off
+			 24 "" off
+			 25 "" off
+			 26 "" off
+			 27 "" off
+			 28 "" off
+			 29 "" off
+			 30 "" off
+			 31 "" off
+			 32 "" off
+			 33 "" off
+			 34 "" off
+			 35 "" off
+			 36 "oh my zsh" on)
 		choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 		clear
 		for choice in $choices
 		do
 		    case $choice in
-	        $)	
+	        $)
 				#Install Flatpak Repository
 				echo "Installing Flatpak Repository"
 				sudo apt install flatpak
 				;;
 
-			$#)	
+			$#)
 				#Install Snap Repository
 				echo "Installing Snap Repository"
 				sudo apt install snapd
 				;;
 
 
-	        1)
-	            #Install Sublime Text*
-				echo "Installing Sublime Text"
-				wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-				sudo apt-get install apt-transport-https
-				echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-				sudo apt update
-				sudo apt install sublime-text -y
-				;;
-
-			2)
-			    	#Simplenote
-				echo "Installing Simplenote"
-				wget https://github.com/Automattic/simplenote-electron/releases/download/v1.1.3/Simplenote-linux-1.1.3.deb
-				cd ~/Downloads
-				sudo dpkg -i Simplenote-linux-1.1.3.deb
-				rm -rf Simplenote-linux-1.1.3.deb
-				;;
-
-
-	            
-    			
-    		3)	
-				#Install Gedit
-				echo "Gedit"
-				apt install gedit -y
-				;;
-				
-			4)
-				#Terminator
-				echo "Installing Skynet/Terminator"
-				apt install terminator -y
-				;;
-
-			5)
-				#Filezilla
-				echo "Filezilla not related to Godzilla"
-				apt install filezilla -y
-				;;
+	    1) #rxvt-unicode
+      echo "Installing rxvt-unicode"
+      sudo apt-get install rxvt-unicode -y
+      ;;
+			2) #Terminator
+      echo "Installing Skynet/Terminator"
+      apt install terminator -y
+      ;;
+  		3) #Simplenote
+  		echo "Installing Simplenote"
+  		wget https://github.com/Automattic/simplenote-electron/releases/download/v1.1.3/Simplenote-linux-1.1.3.deb
+  		cd ~/Downloads
+  		sudo dpkg -i Simplenote-linux-1.1.3.deb
+  		rm -rf Simplenote-linux-1.1.3.deb
+  		;;
+			4) #VIM
+      sudo apt-get install vim -y
+      ;;
+			5) #Filezilla
+			echo "Filezilla not related to Godzilla"
+			apt install filezilla -y
+			;;
 			6)
-				#Zoom
-				echo "Installing Zoom Meeting Client"
-				echo "Installing dependency first First"				
-				apt install libxcb-xtest0
-				cd ~/Downloads				
-				wget https://zoom.us/client/latest/zoom_amd64.deb
-				sudo dpkg -i zoom_amd64.deb
-				rm -rf zoom_amd64.deb
-				;;
-			7)
-				#Telegram
-				echo "Telegram Snap"
-				sudo apt install snapd
-				sudo snap install telegram-desktop
-				;;
-			8)
-				#Elementary OS Tweaks
-				echo "Installing Elementary Tweaks"
-				sudo apt-get install software-properties-common
-				sudo apt-get update
-				sudo apt-get install elementary-tweaks
-				;;
-			9)
-				#Ubuntu Restricted Extras
-				echo "Installing Ubuntu Restricted Extras"
-				apt install ubuntu-restricted-extras -y
-				;;
-			10)
-				#SMPlayer
-				echo "SMPlayer"
-				apt install smplayer -y
-				;;
-			11)
-				#Gnome tweak tool
-				echo "Installing Gnome Tweak Tool"
-				apt install gnome-tweak-tool -y
-				;;
-			12)
 
-				#Chrome
-				echo "Installing Google Chrome"
-				wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-				sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-				apt-get update 
-				apt-get install google-chrome-stable -y
-				;;
-			13)
-				#Vivaldi
-				echo "Installing Vivaldi"
-				cd ~/Downloads				
-				wget https://downloads.vivaldi.com/stable/vivaldi-stable_1.14.1077.55-1_amd64.deb
-				dpkg -i vivaldi-stable_1.14.1077.55-1_amd64.deb
-				apt-get install -f -y
-				rm -rf vivaldi-stable_1.14.1077.55-1_amd64.deb
-				;;
-			14)
-
-				#Firefox Browser
-				echo "Firefox"
-				apt install firefox -y
-
-				;;
-			15)
-
-				#GIMP
-				echo "Installing GIMP"
-				apt install gimp -y
-				;;
-			16)
-				#OBS Studio
-				echo "Installing OBS Studio"
-				sudo apt-get install ffmpeg -y
-				sudo add-apt-repository ppa:obsproject/obs-studio
- 				sudo apt-get update && sudo apt-get install obs-studio -y
-				;;
-			17)
-
-				#Kdenlive
-				echo "Kdenlive"
-				apt-get install kdenlive -y
-				;;
-			18)
-				#Gnome Boxes
-				echo "Installing Gnome Boxes"
-				apt-get install gnome-boxes -y
-				;;
-
-			19)	#Virtualbox
-				echo "Installing Virtualbox"
-				apt install virtualbox -y
-				;;
-
-			20)	#Atom
-				echo "Installing Atom"				
-				cd ~/Downloads			
-				wget -O atom-amd64.deb https://atom.io/download/deb			
-				dpkg -i atom-amd64.deb
-				apt-get install -f -y
-				rm -rf atom-amd64.deb
-				apm install atom-html-preview
-				;;
-
-			21)	#Putty
-				echo "Putty"
-				apt install putty -y
-				;;
-
-			22)	#Steam
-				echo "Installing Steam"				
-				apt install steam -y
-				;;
-
-			23)	#PIA VPN
-				echo "Installing PIA VPN Network Manager Version"
-				cd ~/Downloads				
-				wget https://www.privateinternetaccess.com/installer/install_ubuntu.sh
-				sudo sh ./install_ubuntu.sh
-				echo "After entering username, go to network manager and turn on VPN and select from PIA locations, enter password and boom!"
-				;;
-
-			24)	#Docky
-				echo "Installing Docky"
-				apt install docky -y
-				;;
-
-			25)	#Lutris
-				echo "Installing Lutris"
-				ver=$(lsb_release -sr); if [ $ver != "17.10" -a $ver != "17.04" -a $ver != "16.04" ]; then ver=16.04; fi
-				echo "deb http://download.opensuse.org/repositories/home:/strycore/xUbuntu_$ver/ ./" | sudo tee /etc/apt/sources.list.d/lutris.list
-				wget -q http://download.opensuse.org/repositories/home:/strycore/xUbuntu_$ver/Release.key -O- | sudo apt-key add -
-				sudo apt-get update
-				sudo apt-get install lutris -y
-				;;
-
-			26)	#Hexchat
-				echo "Installing Hexchat"
-				apt install hexchat -y
-				;;
-
-			27)	#Shotwell
-				echo "Installing Shotwell"
-				apt install shotwell -y
-				;;
-			28)	#Cheese
-				echo "Installing Cheese"
-				apt install cheese -y
-				;;
-
-			29) #Audacity
-				echo "installing Audacity"
-				apt install audacity -y
-				;;
-
-			30) #Guvcview
-				echo "installing Guvcview"
-				apt install libgsl2 -y
-				apt install libguvcview-1.1-1 -y
-				apt install guvcview -y
-				;;
-
-			31) #Pithos
-				echo "installing Pithos"
-				apt install pithos -y
-				;;
-			
-			32) #Gnome Shell
-				echo "installing Gnome Shell"
-				apt install chrome-gnome-shell -y
-				;;
-			
-			33) #Gnome-do
-				echo "Installing GnomeDo"
-				apt install gnome-do
-				apt install gnome-do-plugins
-				;;
+			7) #subnetcalc
+      sudo apt-get install subnetcalc -y
+      ;;
+			8) #DIA
+      sudo apt-get install dia -y
+      ;;
+			9) #Teamviewer
+      sudo apt-get purge teamviewer -y
+      sudo apt-get purge teamviewer:i386 -y
+      sudo dpkg --add-architecture i386
+      sudo apt-get update
+      sudo apt-get install libasound2:i386 libfontconfig1:i386 libfreetype6:i386 libjpeg62:i386 libpng12-0:i386 libsm6:i386 libxrandr2:i386 libxrender1:i386 libxtst6:i386 libxinerama1:i386 libqt5qml-graphicaleffects -y
+      wget --continue 'https://download.teamviewer.com/download/linux/teamviewer_amd64.deb'
+      sudo dpkg -i teamviewer_*amd64.deb
+      sudo apt-get install -f -y
+      rm -rf teamviewer_*amd64.deb
+      ;;
+			10) #gdebi
+      sudo apt-get install gdebi -y
+      ;;
+			11) #nmap
+      sudo apt-get install nmap -y
+      ;;
+			12) #screenfetch
+      sudo apt-get install screenfetch -y
+      ;;
+			13) #Vivaldi
+			echo "Installing Vivaldi"
+			cd ~/Downloads
+			wget https://downloads.vivaldi.com/stable/vivaldi-stable_1.14.1077.55-1_amd64.deb
+			dpkg -i vivaldi-stable_1.14.1077.55-1_amd64.deb
+			apt-get install -f -y
+			rm -rf vivaldi-stable_1.14.1077.55-1_amd64.deb
+			;;
+			14) #tomboy
+      sudo apt-get install tomboy -y
+      ;;
+			15) #GIMP
+			echo "Installing GIMP"
+			apt install gimp -y
+			;;
+			16) #Atom
+      echo "Installing Atom"
+      cd ~/Downloads
+      wget -O atom-amd64.deb https://atom.io/download/deb
+      dpkg -i atom-amd64.deb
+      apt-get install -f -y
+      rm -rf atom-amd64.deb
+      apm install atom-html-preview
+      ;;
+			17)  #Putty
+			echo "Putty"
+			apt install putty -y
+			;;
+			18) #Steam
+      echo "Installing Steam"
+      apt install steam -y
+      ;;
+			19) #Docky
+			echo "Installing Docky"
+			apt install docky -y
+			;;
+			20) #Hexchat
+			echo "Installing Hexchat"
+			apt install hexchat -y
+			;;
+			21)	#Discord
+      sudo apt install snapd
+      sudo snap install discord
+      ;;
+			22)	#Etcher ISO Creator
+			echo "Installing Etcher"
+			cd ~/Downloads
+			wget -O etcher.zip https://github.com/resin-io/etcher/releases/download/v1.3.1/etcher-1.3.1-linux-x86_64.zip
+			sudo apt install unzip -y
+			unzip etcher*.zip
+			chmod +x ~/Downloads/etcher-*.AppImage
+			;;
+			23)
+      ;;
+			24)
+      ;;
+			25)
+      ;;
+			26)
+      ;;
+			27)
+      ;;
+			28)
+      ;;
+			29)
+      ;;
+			30)
+      ;;
+			31)
+      ;;
+			32)
+      ;;
+			33)
+      ;;
 			34)
-				#Discord
-				sudo apt install snapd
-				sudo snap install discord
-				;;
-
-			35) #Google Desktop Player
-				echo "Installing Google Desktop Player"
-				cd ~/Downloads
-				wget -O google-play-music-desktop-player.deb https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-/releases/download/v4.5.0/google-play-music-desktop-player_4.5.0_amd64.deb
-				sudo dpkg -i google-play-music-desktop-player*.deb
-				apt-get install -f -y
-				rm -rf google-play-music-desktop-player*.deb
-				;;
-
-			36) #Etcher ISO Creator
-				echo "Installing Etcher"
-				cd ~/Downloads
-				wget -O etcher.zip https://github.com/resin-io/etcher/releases/download/v1.3.1/etcher-1.3.1-linux-x86_64.zip	
-				sudo apt install unzip -y
-				unzip etcher*.zip
-				chmod +x ~/Downloads/etcher-*.AppImage
-				;;
-
+      ;;
+			35)
+      ;;
+			36) #oh-my-zsh
+      sudo apt-get install curl -y
+      sudo apt-get install git -y
+      sudo apt-get install zsh -y
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+      ;;
 	    esac
 	done
 fi
-
