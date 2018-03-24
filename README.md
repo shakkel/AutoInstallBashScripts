@@ -7,4 +7,6 @@ Type in terminal ./installscript to run
 A menu will open up with selectable packages to install
 Select packages and click ok
 Packages will auto install
-Tested with Elementary Loki, Ubuntu 17.10, Ubuntu 18.04 Beta
+
+
+I changed the packages to install.
