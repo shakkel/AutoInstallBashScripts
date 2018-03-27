@@ -38,10 +38,10 @@ else
 			 20 "Hexchat" off
 			 21 "Discord (Snap)" off
 			 22 "Etcher" off
-			 23 "" off
-			 24 "" off
-			 25 "" off
-			 26 "" off
+			 23 "Stacer" on
+			 24 "Papirus Icon Theme" off
+			 25 "Kdenlive" off
+			 26 "Asciinema - Terminal recorder" off
 			 27 "" off
 			 28 "" off
 			 29 "" off
@@ -49,8 +49,8 @@ else
 			 31 "" off
 			 32 "" off
 			 33 "" off
-			 34 "" off
-			 35 "" off
+			 34 "Desktop Environment - Cinnamon" off
+			 35 "Window Manager - i3" off
 			 36 "oh my zsh" on)
 		choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 		clear
@@ -86,6 +86,7 @@ else
   		rm -rf Simplenote-linux-1.1.3.deb
   		;;
 			4) #VIM
+      echo "Installing vim"
       sudo apt-get install vim -y
       ;;
 			5) #Filezilla
@@ -93,14 +94,17 @@ else
 			apt install filezilla -y
 			;;
 			6)
-
+      ;;
 			7) #subnetcalc
+      echo "Installing subnetcalc"
       sudo apt-get install subnetcalc -y
       ;;
 			8) #DIA
+      echo "Installing dia"
       sudo apt-get install dia -y
       ;;
 			9) #Teamviewer
+      echo "Installing Teamviewer"
       sudo apt-get purge teamviewer -y
       sudo apt-get purge teamviewer:i386 -y
       sudo dpkg --add-architecture i386
@@ -112,12 +116,15 @@ else
       rm -rf teamviewer_*amd64.deb
       ;;
 			10) #gdebi
+      echo "Installing gdebi"
       sudo apt-get install gdebi -y
       ;;
 			11) #nmap
+      echo "Installing nmap"
       sudo apt-get install nmap -y
       ;;
 			12) #screenfetch
+      echo "Installing screenfetch"
       sudo apt-get install screenfetch -y
       ;;
 			13) #Vivaldi
@@ -129,6 +136,7 @@ else
 			rm -rf vivaldi-stable_1.14.1077.55-1_amd64.deb
 			;;
 			14) #tomboy
+      echo "Installing Tomboy"
       sudo apt-get install tomboy -y
       ;;
 			15) #GIMP
@@ -161,6 +169,7 @@ else
 			apt install hexchat -y
 			;;
 			21)	#Discord
+      echo "Installing Discord"
       sudo apt install snapd
       sudo snap install discord
       ;;
@@ -172,13 +181,25 @@ else
 			unzip etcher*.zip
 			chmod +x ~/Downloads/etcher-*.AppImage
 			;;
-			23)
+			23) #Stacer
+      echo "Installing Stacer"
+      sudo add-apt-repository ppa:oguzhaninan/stacer
+      sudo apt-get update && sudo apt-get install stacer
       ;;
-			24)
+			24) #Papirus Icon Theme
+      echo "Installing Papirus Icons"
+      sudo add-apt-repository ppa:papirus/papirus
+      sudo apt update && sudo apt install papirus-icon-theme
       ;;
-			25)
+			25) #Kdenlive
+      echo "Kdenlive"
+      sudo apt-get install kdenlive
       ;;
-			26)
+			26) #asciinema
+      echo "Installing Asciinema"
+      sudo apt-add-repository ppa:zanchey/asciinema
+      sudo apt-get update
+      sudo apt-get install asciinema
       ;;
 			27)
       ;;
@@ -194,9 +215,19 @@ else
       ;;
 			33)
       ;;
-			34)
+			34) #Cinnamon
+      echo "Installing Cinnamon - DE"
+      sudo apt-get install cinnamon
       ;;
-			35)
+			35) #i3
+      echo "Installing i3 - WM"
+      sudo apt-get install arandr
+      sudo apt-get install compton
+      sudo apt-get install feh
+      sudo apt-get install i3
+      sudo apt-get install i3blocks
+      sudo apt-get install lxappearance
+      sudo apt-get install rofi
       ;;
 			36) #oh-my-zsh
       sudo apt-get install curl -y
