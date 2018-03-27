@@ -1,5 +1,5 @@
 # AutoInstallBashScripts
-Scripts for core packages like Filezilla, Atom, Steam, Simplenote, Lutris, OBS, etc. auto installation bash script
+Scripts for core packages like Filezilla, Atom, Steam, Simplenote, etc. auto installation bash script
 Download bash script to a folder ex: /Documents or /Downloads
 Right click on file to give execute permissions
 Go to terminal and change to directory where you put downloaded file (ex: cd Downloads)
