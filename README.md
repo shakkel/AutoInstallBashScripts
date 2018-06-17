@@ -10,3 +10,9 @@ Packages will auto install
 
 
 I changed the packages to install.
+
+
+
+for Wallpaper:
+
+https://github.com/iabem97/komorebi/releases
